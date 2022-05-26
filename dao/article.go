@@ -40,7 +40,7 @@ func UpdateArticles(article *model.Article) error {
 // 根据id查看文章
 func FindArticle(id int) (*model.Article, error) {
 	var article model.Article
-	err := db.DB.Find(&article, id).Error
+	err := db.DB.Where("id=?", id).Find(&article).Error
 	if err != nil {
 		return nil, err
 	}
