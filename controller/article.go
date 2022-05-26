@@ -172,6 +172,14 @@ func ShowArticle(c *gin.Context) {
 		return
 	}
 
+	if article.ID == 0 {
+		c.JSON(http.StatusOK, &Res{
+			Code: 1,
+			Msg:  "未找到该篇文章",
+		})
+		return
+	}
+
 	err = logic.IncArticleReadCount(query)
 	if err != nil {
 		log.Printf("文章阅读加一失败：%v", err)
